@@ -1,0 +1,22 @@
+<div class="container">
+  <div class="row">
+    <div>
+      <ul class="nav nav-tabs">
+        <li role="presentation" 
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{exact: true}">
+          <a routerLink="/">Add TODO</a>
+        </li>
+        <li role="presentation" 
+          routerLinkActive="active">
+          <a routerLink="list">List TODO</a>
+        </li>
+      </ul>
+    </div>
+  </div><br/>
+  <div class="row">
+    <div >
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

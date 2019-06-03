@@ -1,0 +1,111 @@
+<div class="todo-content">
+  <table class="table" >
+    <tr>
+      <th>Delete All</th>
+      <th>Title</th>
+      <th>Description</th>
+      <th>Time</th>
+      <th>Edit</th>
+      <th>Delete</th>
+    </tr>
+    <tbody>
+    <tr *ngFor="let todo of todos" class="todo-edit">
+        <td><input #{{todo.id}} [(ngModel)]="todo.selected" type="checkbox"></td>
+        <td><span class="todo-title">{{todo.title}}</span></td>
+        <td><span>{{todo.description}}</span></td>
+        <td><span>{{todo.createdAt}}</span></td>
+        <td>
+         
+            <button type="button" class="btn btn-primary" (click)="openModal(template, todo) ">Edit</button>
+ 
+            <ng-template #template>
+              <div class="modal-header">
+                <h4 class="modal-title pull-left">Modal</h4>
+                <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body" >
+                  <label for="title">Title</label> &nbsp; <input type="text" 
+         [(ngModel)]="editingTodo.title" required>
+        <label for="description">Description</label> &nbsp; <input type="text"
+         [(ngModel)]="editingTodo.description" required>
+         <label for="createdAt">Date Time</label> &nbsp; <input
+         [(ngModel)]="editingTodo.createdAt" 
+               [owlDateTimeTrigger]="dt1" [owlDateTime]="dt1"
+               #createdAt="ngModel"  ng-style="{'z-index': 1000000000000;}">
+        <owl-date-time #dt1  ng-style="{'z-index': 1000000000000;}"></owl-date-time>
+        <span class="edit-actions">
+            <a (click)="updateTodo(editingTodo);modalRef.hide()" >
+              <i class="material-icons">done</i>
+            </a>
+            <a (click)="modalRef.hide()">
+              <i class="material-icons">clear</i>
+            </a>
+        </span>
+              </div>
+            </ng-template>
+        </td>
+          <!-- MODAL -->
+
+
+        <td><span class="todo-actions">
+            <a (click)="deleteTodo(todo.id)">
+              <i class="material-icons delete">clear</i>
+          </a>
+      </span></td>
+     
+    </tr>
+   
+    <tr>
+      <td colspan="6"><button class="btn primary delete "  (click)="deleteTodoSelected()">Delete</button></td>
+    </tr>
+  </tbody>
+  </table>
+  <!-- <ul class="todo-list">
+  <li *ngFor="let todo of todos">
+    <div class="todo-row" *ngIf="!editing || editingTodo.id != todo.id">
+        <input type="checkbox" id="todo.id">
+        <span class="todo-title">
+          {{todo.title}}
+        </span> &nbsp; 
+        <span>
+            {{todo.description}}
+        </span> &nbsp; 
+        <span>
+          {{todo.createdAt}}
+        </span> &nbsp; 
+        <span class="todo-actions">
+            <a (click)="editTodo(todo)">
+              <i class="material-icons edit">edit</i>
+            </a>
+            <a (click)="deleteTodo(todo.id)">
+              <i class="material-icons delete">clear</i>
+            </a>
+        </span>
+    </div>
+    <div class="todo-edit" *ngIf="editing && editingTodo.id === todo.id">
+       <label for="title">Title</label> &nbsp; <input type="text" 
+         [(ngModel)]="editingTodo.title" required> &nbsp;
+        <label for="description">Description</label> &nbsp; <input type="text"
+         [(ngModel)]="editingTodo.description" required> &nbsp;
+         <label for="createdAt">Date Time</label> &nbsp; <input
+         [(ngModel)]="editingTodo.createdAt" 
+               [owlDateTimeTrigger]="dt1" [owlDateTime]="dt1"
+               #createdAt="ngModel">
+        <owl-date-time #dt1></owl-date-time>
+        <span class="edit-actions">
+            <a (click)="updateTodo(editingTodo)">
+              <i class="material-icons">done</i>
+            </a>
+            <a (click)="clearEditing()">
+              <i class="material-icons">clear</i>
+            </a>
+        </span>
+    </div>
+  </li>
+</ul> -->
+<div class="no-todos" *ngIf="todos && todos.length == 0">
+    <p>No Todos Found!</p>
+</div>
+</div>
