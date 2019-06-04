@@ -19,7 +19,7 @@
 <div class="highlight highlight-source-shell"><pre><span class="pl-c1">cd</span> todo_FE
 npm install</pre></div>
 
-<div class="highlight highlight-source-shell"><pre>npm serve</pre></div>
+<div class="highlight highlight-source-shell"><pre>ng serve</pre></div>
 
 <h2>Video Link<h2>
 
