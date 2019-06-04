@@ -52,6 +52,13 @@ public class TodoController {
                 }).orElse(ResponseEntity.notFound().build());
     }
 
- 
+ @DeleteMapping(value="/todos/{id}")
+    public ResponseEntity<?> deleteTodo(@PathVariable("id") Long id) {
+        return todoRepository.findById(id)
+                .map(todo -> {
+                    todoRepository.deleteById(id);
+                    return ResponseEntity.ok().build();
+                }).orElse(ResponseEntity.notFound().build());
+    }
     
 }
